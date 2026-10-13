@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#7bcf69"><meta name="description" content="Happy Farm — a gentle touch-and-play learning game for preschoolers.">
+<title>Happy Farm — Play & Learn</title>
+<style>
+:root{--sky:#b9eaff;--grass:#8bd46e;--green:#4baf58;--yellow:#ffd84e;--red:#ed5a55;--ink:#553b32;--cream:#fff9e8}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:ui-rounded,"Trebuchet MS",system-ui,sans-serif;color:var(--ink);background:#e9f8ff}button{font:inherit;touch-action:manipulation;cursor:pointer;border:0}
+.app{max-width:980px;margin:auto;min-height:100dvh;padding:clamp(10px,2.5vw,24px);display:flex;flex-direction:column;gap:12px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:8px}.brand{display:flex;align-items:center;gap:9px;font-size:clamp(1.1rem,3.5vw,1.8rem);font-weight:1000;color:#39984b;text-shadow:0 2px white}.pill{background:white;border:2px solid #d6edbc;border-radius:999px;padding:8px 13px;font-weight:900;box-shadow:0 3px 0 #b9d9a4}
+.panel{background:#fffdf4;border:3px solid #fff;border-radius:28px;box-shadow:0 7px 0 #d2e7bc;overflow:hidden}
+.hero{background:linear-gradient(var(--sky) 0 58%,#d3f0a0 58% 100%);position:relative;padding:20px 14px 18px;text-align:center;min-height:260px;display:flex;align-items:center;justify-content:center;gap:12px}
+.cloud{position:absolute;font-size:clamp(28px,6vw,52px);opacity:.8;pointer-events:none}.cloud.one{left:5%;top:12px}.cloud.two{right:7%;top:32px}.hero-content{z-index:1;max-width:620px}.hero h1{font-size:clamp(2rem,7vw,4rem);line-height:1;margin:4px 0;color:#39984b;text-shadow:0 3px white,0 5px #b9d9a4}.hero p{margin:9px 0 14px;font-size:clamp(.95rem,2.5vw,1.15rem);font-weight:800}
+.primary{background:var(--yellow);color:#69431d;padding:13px 24px;border-radius:18px;box-shadow:0 5px 0 #e3a72c;font-size:1.08rem;font-weight:1000}.primary:active,.choice:active,.navbtn:active{transform:translateY(3px);box-shadow:none}
+.pig{width:clamp(110px,25vw,185px);height:auto;filter:drop-shadow(0 6px 0 #a8ce83);flex-shrink:0}.home-pig{margin-top:8px}
+h2{font-size:1.2rem;margin:0 0 10px}.levels{padding:16px}.level-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px}.level{min-height:95px;border-radius:20px;background:#fff0b3;border:3px solid #fff;box-shadow:0 4px 0 #e4cb77;padding:9px 4px;color:#765020;font-weight:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}.level .emoji{font-size:1.8rem}.level.done{background:#d7f7c7;box-shadow:0 4px 0 #9dce83}.level:focus-visible,button:focus-visible{outline:4px solid #236fd4;outline-offset:3px}
+.footer{text-align:center;font-size:.82rem;font-weight:700;color:#65845c;padding:4px}
+.gamehead{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 14px}.gamehead h2{margin:0;font-size:clamp(1rem,3vw,1.35rem)}.navbtn{background:#fff;border:2px solid #e3edcf;border-radius:14px;padding:9px 12px;font-weight:900;box-shadow:0 3px 0 #d8e5c6}
+.playfield{position:relative;min-height:350px;height:min(55dvh,520px);background:linear-gradient(#b9eaff 0 53%,#b0e982 53% 100%);overflow:hidden;touch-action:pan-y}
+.sun{position:absolute;right:7%;top:6%;font-size:clamp(35px,8vw,65px)}.hill{position:absolute;bottom:27%;height:23%;width:75%;border-radius:50% 50% 0 0;background:#8dd36e;left:-8%}.hill.h2{left:45%;bottom:24%;background:#75c95e;width:70%}.fence{position:absolute;bottom:23%;left:0;right:0;height:35px;background:repeating-linear-gradient(90deg,#f8e0a1 0 13px,#c58c4d 13px 17px);border-block:5px solid #d7aa68;opacity:.95}
+.instruction{position:absolute;top:12px;left:12px;right:12px;margin:auto;width:max-content;max-width:calc(100% - 24px);background:#fffdf0eF;border:2px solid white;border-radius:18px;padding:9px 14px;font-weight:1000;text-align:center;box-shadow:0 3px #d2e4c1;z-index:4}
+.pieces{position:absolute;inset:65px 10px 30px;display:flex;align-items:center;justify-content:space-evenly;gap:8px;flex-wrap:wrap;z-index:3}.piece{width:clamp(76px,17vw,120px);height:clamp(76px,17vw,120px);border-radius:25px;background:#fff9e9;border:3px solid white;box-shadow:0 5px 0 #c1dda9;display:flex;align-items:center;justify-content:center;font-size:clamp(38px,9vw,68px);user-select:none;touch-action:manipulation;transition:transform .15s}.piece:active{transform:scale(.94)}.piece.target{background:#fff0a7;border-color:#ffcf37;animation:bob 1.2s infinite ease-in-out}.piece.good{background:#c9f6b6;box-shadow:0 5px 0 #91ca7a}.piece[draggable=true]{cursor:grab}
+@keyframes bob{50%{transform:translateY(-5px)}}.bottomline{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px}.progress{height:13px;border-radius:99px;background:#e8efd9;overflow:hidden;flex:1}.progress>span{display:block;height:100%;width:0;background:#62c85a;border-radius:99px;transition:width .3s}.feedback{font-size:1rem;font-weight:1000;min-height:24px;text-align:center;color:#31914b;padding:2px 10px}.hidden{display:none!important}.win{padding:24px;text-align:center;background:linear-gradient(#d6f3ff,#fff6bd)}.win h2{font-size:clamp(1.8rem,6vw,3rem);color:#31914b}.win .stars{font-size:2.8rem;letter-spacing:8px}
+@media(max-width:600px){.app{padding:10px;gap:10px}.hero{min-height:225px;padding:14px 10px}.home-pig{width:108px}.level-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.level{min-height:82px}.playfield{height:52dvh;min-height:340px}.pieces{inset:70px 7px 22px}.bottomline{padding:10px}.gamehead{padding:10px}.brand{font-size:1.1rem}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main class="app">
+<header class="topbar"><div class="brand"><span aria-hidden="true">🌻</span> HAPPY FARM</div><div class="pill" id="stars" aria-live="polite">⭐ 0</div></header>
+<section id="home">
+ <div class="panel hero"><span class="cloud one" aria-hidden="true">☁️</span><span class="cloud two" aria-hidden="true">☁️</span>
+ <svg class="pig home-pig" viewBox="0 0 180 190" role="img" aria-label="Bryan the piglet wearing a yellow shirt and red overalls">
+ <ellipse cx="90" cy="170" rx="52" ry="10" fill="#72bd60" opacity=".45"/><path d="M48 40 35 13Q31 3 44 10L68 29M112 29l24-19q12-7 9 5l-13 26" fill="#f4a7a1" stroke="#d97876" stroke-width="3"/><ellipse cx="90" cy="72" rx="57" ry="52" fill="#f7b8b2" stroke="#db8986" stroke-width="3"/><ellipse cx="69" cy="66" rx="6" ry="8" fill="#493b3a"/><ellipse cx="111" cy="66" rx="6" ry="8" fill="#493b3a"/><circle cx="71" cy="63" r="2" fill="white"/><circle cx="113" cy="63" r="2" fill="white"/><ellipse cx="90" cy="86" rx="23" ry="16" fill="#ed8f91"/><ellipse cx="82" cy="84" rx="3" ry="4" fill="#a95f65"/><ellipse cx="98" cy="84" rx="3" ry="4" fill="#a95f65"/><path d="M78 101q12 13 24 0" fill="none" stroke="#9d5554" stroke-width="3" stroke-linecap="round"/><path d="M49 120q-17 9-14 32l17 1 10-24M131 120q17 9 14 32l-17 1-10-24" fill="#f7b8b2" stroke="#db8986" stroke-width="3"/><path d="M49 119q41-22 82 0l-5 47H54z" fill="#ffd747" stroke="#e5ac29" stroke-width="3"/><path d="M58 132q32-14 64 0l-4 37H62z" fill="#e94f50" stroke="#b93840" stroke-width="3"/><path d="M68 125v19h14v-19M98 125v19h14v-19" fill="none" stroke="#b93840" stroke-width="7"/><rect x="76" y="143" width="28" height="18" rx="5" fill="#f86a62" stroke="#b93840" stroke-width="3"/><circle cx="90" cy="151" r="3" fill="#ffd747"/><path d="M62 165v12h19v-12M99 165v12h19v-12" fill="#e94f50" stroke="#b93840" stroke-width="3"/><ellipse cx="71" cy="89" rx="8" ry="4" fill="#f7a1a0" opacity=".7"/><ellipse cx="109" cy="89" rx="8" ry="4" fill="#f7a1a0" opacity=".7"/>
+ </svg>
+ <div class="hero-content"><h1>Happy Farm!</h1><p>Let’s learn and play with Bryan 🐷</p><button class="primary" id="start">▶ Let's Play!</button></div>
+ </div>
+ <section class="panel levels"><h2>🌈 Choose an activity</h2><div class="level-grid" id="levelGrid"></div></section>
+</section>
+<section id="game" class="panel hidden" aria-label="Game area">
+ <div class="gamehead"><button class="navbtn" id="homeBtn" aria-label="Back to farm">🏡 Home</button><h2 id="levelTitle">Find the animals</h2><div class="pill" id="roundCount">1 / 3</div></div>
+ <div class="playfield" id="playfield"><span class="sun" aria-hidden="true">☀️</span><div class="hill"></div><div class="hill h2"></div><div class="fence"></div><div class="instruction" id="instruction">Tap the cow!</div><div class="pieces" id="pieces"></div></div>
+ <div class="feedback" id="feedback" aria-live="polite">You can do it!</div>
+ <div class="bottomline"><span aria-hidden="true">🌱</span><div class="progress" role="progressbar" aria-label="Activity progress" aria-valuemin="0" aria-valuemax="3" aria-valuenow="0" id="progress"><span id="progressFill"></span></div><span id="miniStars">⭐ 0</span></div>
+</section>
+<section id="win" class="panel win hidden"><div class="stars" aria-hidden="true">🌟 🐷 🌟</div><h2>Great job!</h2><p id="winMessage">You did it, little farmer!</p><button class="primary" id="again">Play again 🔁</button> <button class="navbtn" id="winHome">🏡 Farm home</button></section>
+<footer class="footer">Made for little learners • Gentle play, happy days 🌼</footer>
+</main>
+<script>
+const activities=[
+ {name:"Animal Friends",icon:"🐮",prompt:"Find the cow!",target:"🐮",items:["🐮","🐷","🐔"],type:"find"},
+ {name:"Farm Colors",icon:"🎨",prompt:"Find something RED!",target:"🔴",items:["🔴","🟡","🔵"],type:"find"},
+ {name:"Garden Time",icon:"🥕",prompt:"Pick the carrot!",target:"🥕",items:["🥕","🌽","🍓"],type:"find"},
+ {name:"Feed the Animals",icon:"🍎",prompt:"Give the pig an apple!",target:"🍎",items:["🍎","🌾","🥛"],type:"feed"},
+ {name:"Count the Eggs",icon:"🥚",prompt:"Tap 3 eggs!",target:"🥚",items:["🥚","🥚","🥚","🐣","🌽"],type:"count"}
+];
+const $=id=>document.getElementById(id);
+let current=0,round=0,score=Number(localStorage.getItem("happyFarmStars")||0),completed=JSON.parse(localStorage.getItem("happyFarmDone")||"[]"),counted=0,locked=false;
+function updateStars(){$("stars").textContent="⭐ "+score;$("miniStars").textContent="⭐ "+score}
+function drawLevels(){$("levelGrid").innerHTML="";activities.forEach((a,i)=>{let b=document.createElement("button");b.className="level"+(completed.includes(i)?" done":"");b.innerHTML='<span class="emoji">'+a.icon+'</span><span>'+(i+1)+'. '+a.name+'</span><small>'+(completed.includes(i)?"✓ Completed":"Play")+'</small>';b.addEventListener("click",()=>begin(i));$("levelGrid").append(b)})}
+function show(view){["home","game","win"].forEach(id=>$(id).classList.toggle("hidden",id!==view))}
+function begin(i){current=i;round=0;counted=0;locked=false;show("game");setupRound()}
+function setupRound(){
+ const a=activities[current];$("levelTitle").textContent=a.name;$("instruction").textContent=a.prompt;$("roundCount").textContent=(round+1)+" / 3";$("feedback").textContent="You can do it!";$("progressFill").style.width=(round/3*100)+"%";$("progress").setAttribute("aria-valuenow",round);$("pieces").innerHTML="";counted=0;locked=false;
+ let items=[...a.items];if(a.type!=="count")items.sort(()=>Math.random()-.5);
+ items.forEach((emoji,index)=>{const b=document.createElement("button");b.className="piece";b.textContent=emoji;b.setAttribute("aria-label","Choose "+emoji);b.addEventListener("click",()=>choose(b,emoji));if(a.type==="feed"){b.draggable=true;b.addEventListener("dragstart",e=>e.dataTransfer.setData("text/plain",emoji))}$("pieces").append(b)});
+ if(a.type==="count")$("instruction").textContent="Tap 3 eggs!";
+}
+function choose(btn,emoji){if(locked||btn.classList.contains("good"))return;const a=activities[current];if(a.type==="count"){if(emoji==="🥚"){btn.classList.add("good");btn.textContent="✨";counted++;if(counted>=3)success()}else gentle();return}
+ if(emoji===a.target){btn.classList.add("good");btn.textContent="✨";success()}else gentle()}
+function gentle(){$("feedback").textContent=["Good try! 🌼","Almost! Try another one! 💛","Keep exploring! 🐾"][Math.floor(Math.random()*3)];if(navigator.vibrate)navigator.vibrate(25)}
+function success(){if(locked)return;locked=true;score++;localStorage.setItem("happyFarmStars",score);updateStars();$("feedback").textContent=["Wonderful! 🌟","You did it! 🎉","Super farmer! 💚"][round%3];$("progressFill").style.width=((round+1)/3*100)+"%";$("progress").setAttribute("aria-valuenow",round+1);setTimeout(()=>{round++;if(round<3)setupRound();else finish()},900)}
+function finish(){if(!completed.includes(current))completed.push(current);localStorage.setItem("happyFarmDone",JSON.stringify(completed));drawLevels();$("winMessage").textContent=activities[current].name+" complete! You earned 3 stars!";show("win")}
+$("start").addEventListener("click",()=>begin(0));$("homeBtn").addEventListener("click",()=>{show("home");drawLevels()});$("winHome").addEventListener("click",()=>{show("home");drawLevels()});$("again").addEventListener("click",()=>begin(current));
+$("pieces").addEventListener("dragover",e=>e.preventDefault());$("pieces").addEventListener("drop",e=>{e.preventDefault();const a=activities[current];if(a.type!=="feed")return;const emoji=e.dataTransfer.getData("text/plain");if(emoji===a.target)success();else gentle()});
+updateStars();drawLevels();
+</script>
+</body></html>
