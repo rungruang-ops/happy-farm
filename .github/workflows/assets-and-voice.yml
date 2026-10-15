@@ -1,0 +1,101 @@
+name: Generate Assets and Voice
+
+on:
+  workflow_dispatch:
+    inputs:
+      generate_assets:
+        description: 'Generate art assets from content/art.csv'
+        required: false
+        default: 'true'
+        type: boolean
+      generate_voice:
+        description: 'Generate voice files from content/phrases.csv'
+        required: false
+        default: 'true'
+        type: boolean
+
+jobs:
+  generate:
+    name: Generate game assets
+    runs-on: ubuntu-latest
+    environment: development
+    permissions:
+      contents: write
+      pull-requests: write
+
+    env:
+      OPENAI_API_KEY: ${{ secrets.GEN_AI }}
+      ASSETS_OUTPUT_DIR: art
+      VOICE_OUTPUT_DIR: audio/voice
+      EDGE_TTS_VOICE: ${{ vars.EDGE_TTS_VOICE || 'en-US-AriaNeural' }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: Generate images
+        if: ${{ github.event.inputs.generate_assets == 'true' || github.event.inputs.generate_assets == true }}
+        run: |
+          if [ -z "${OPENAI_API_KEY}" ]; then
+            echo "OPENAI_API_KEY (from environment secret GEN_AI) is missing. Add it in Settings → Environments → development."
+            exit 1
+          fi
+          python tools/make_assets.py
+
+      - name: Generate voice files
+        if: ${{ github.event.inputs.generate_voice == 'true' || github.event.inputs.generate_voice == true }}
+        run: |
+          python tools/make_voice.py
+
+      - name: Upload generated artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-artifacts
+          path: |
+            art/
+            audio/voice/
+          if-no-files-found: warn
+
+      - name: Commit generated assets to branch
+        if: ${{ secrets.GH_PAT != '' }}
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          BRANCH=generated-assets-${{ github.run_number }}
+          git checkout -b $BRANCH
+          git add art audio/voice || true
+          if git diff --cached --quiet; then
+            echo "No generated files changed."
+            exit 0
+          fi
+          git commit -m "chore: generate assets and voice files"
+          git push https://x-access-token:${GH_PAT}@github.com/${{ github.repository }} HEAD:refs/heads/$BRANCH
+
+      - name: Create PR for generated files
+        if: ${{ secrets.GH_PAT != '' }}
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: |
+          # Create a PR using GitHub CLI if available, otherwise use API via curl
+          if ! command -v gh >/dev/null 2>&1; then
+            echo 'gh CLI not found; using API to create PR.'
+            API_URL="https://api.github.com/repos/${{ github.repository }}/pulls"
+            DATA=$(jq -n --arg t "Automated asset generation" --arg h "Merge generated assets" --arg b "generated-assets-${{ github.run_number }}" '{title: $t, head: $b, base: "feature/factory-setup", body: $h}')
+            curl -s -X POST -H "Authorization: token ${GH_PAT}" -H "Accept: application/vnd.github.v3+json" $API_URL -d "$DATA" || true
+          else
+            gh auth login --with-token <<< "${GH_PAT}"
+            gh pr create --title "Automated asset generation" --body "Generated assets and voice files" --base feature/factory-setup --head generated-assets-${{ github.run_number }} || true
+          fi
