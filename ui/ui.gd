@@ -1,5 +1,7 @@
+# ui/ui.gd
 extends Control
+class_name UIManager
 
-# UI helpers
-func show_toast(text: String) -> void:
+func show_popup(text: String) -> void:
+	# show a simple popup
 	pass

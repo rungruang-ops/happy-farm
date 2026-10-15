@@ -1,1 +1,3 @@
-STYLE: cute 3D cartoon render for a preschool kids game, soft rounded chunky shapes, smooth clay-like glossy materials, warm sunny daylight from the top-left, soft ambient occlusion, gentle saturated colors (sky blue, grass green, warm wood brown, sunny yellow, cherry red), clean crisp edges, 3D animated family film style, high quality mobile game asset.
+style: friendly, rounded shapes, bright saturated colors
+palette: warm pastels
+notes: keep shapes simple for preschool readability

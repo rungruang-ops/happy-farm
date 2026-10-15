@@ -1,11 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="00000000-0000-0000-0000-000000000000"]
+
 [application]
 config/name="Happy Farm"
-run/main_scene="res://screens/title_screen.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/description="Educational game for young children"
+config/author="rungruang-ops"
 
-[autoload]
-Catalog="res://autoload/catalog.gd"
-GameState="res://autoload/game_state.gd"
-Sfx="res://autoload/sfx.gd"
-Juice="res://autoload/juice.gd"
-Router="res://autoload/router.gd"
+[rendering]
+quality/driver/driver_name="GLES3"

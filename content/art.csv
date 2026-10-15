@@ -1,16 +1,3 @@
-id,kind,prompt
-bryan_sheet,ref,"Character turnaround sheet, full body, four views side by side: front, three-quarter, side, back, neutral standing pose, same scale in every view, evenly spaced"
-bryan_idle,char,"standing relaxed, gentle smile, arms at sides"
-bryan_wave,char,"waving one hand hello, big happy smile"
-bryan_cheer,char,"jumping with both arms raised, eyes closed with joy, mouth wide open"
-bryan_think,char,"hand on chin, gentle encouraging smile"
-basket,prop,"empty round woven basket in plain off-white cream color"
-tub,prop,"wooden half-barrel tub filled with golden hay"
-tractor,prop,"cute red cartoon tractor with big friendly eyes and a smile on the front, three-quarter view facing left"
-logo_frame,ui,"big horizontal wooden sign decorated with green leaves, small flowers and a yellow butterfly, completely blank"
-sign_wood,ui,"horizontal wooden plank sign with rounded corners and a darker wood border, completely blank"
-star,ui,"single glossy golden star with soft rounded points"
-hand,ui,"cartoon white glove hand pointing with the index finger"
-bg_title,bg,"sunny farm with a red barn and silo on the left, wooden fence, green rolling hills, fluffy clouds, flowers in the foreground; keep the center and right side open"
-bg_map,bg,"three-quarter top-down view of a farm valley, a winding dirt path from left to right with small empty round clearings, a small river, a windmill, a little farmhouse"
-bg_play,bg,"farmyard with a distant red barn, wooden fence, grass ground; keep the lower two-thirds open and uncluttered"
+art_key,category,prompt
+apple_basic,items,A simple cute red apple, child-friendly style
+carrot_basic,items,A smiling carrot with leaves, bright colors

@@ -1,6 +1,9 @@
+# core/level_factory.gd
 extends Node
+class_name LevelFactory
 
-# Level factory placeholder
-func make_level(id: String) -> Node:
-	# Return a new instance of a level scene based on id
-	return null
+func create_level(level_id: String) -> Node:
+	# return a new level scene instance (placeholder)
+	var node := Node.new()
+	node.name = level_id
+	return node

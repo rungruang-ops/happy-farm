@@ -1,25 +1,26 @@
-GODOT ?= godot
-PY    ?= python
+# Makefile for happy-farm
+.PHONY: setup assets voice redo run release
 
 setup:
-	$(PY) tools/make_assets.py --setup
+	python -m pip install --upgrade pip
+	python -m pip install -r requirements.txt
 
 assets:
-	$(PY) tools/make_assets.py
-	$(PY) tools/make_voice.py
+	python tools/make_assets.py
+
+voice:
+	python tools/make_voice.py
 
 redo:
-	$(PY) tools/make_assets.py --redo --only $(ID)
+	# regenerate assets and voice
+	rm -rf art/* audio/voice/* || true
+	make assets
+	make voice
 
-import: setup
-	$(GODOT) --headless --path game --import
+run:
+	# Run Godot editor (requires godot 4 installed and on PATH)
+	godot --path .
 
-run: import
-	$(GODOT) --path game
-
-release: import
-	mkdir -p build/web build/android
-	$(GODOT) --headless --path game --export-release "Web" ../build/web/index.html
-	$(GODOT) --headless --path game --export-release "Android" ../build/android/happyfarm.apk
-
-.PHONY: setup assets redo import run release
+release:
+	# Export presets should be configured in Godot editor. Example placeholder:
+	@echo "Use Godot editor to export or configure export_presets.cfg"

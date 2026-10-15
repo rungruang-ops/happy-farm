@@ -1,5 +1,9 @@
-extends Button
+# game/choice_card.gd
+extends Control
+class_name ChoiceCard
 
-# Choice card placeholder
-func _ready():
+var choice_id: String
+
+func set_choice(data):
+	# populate UI
 	pass

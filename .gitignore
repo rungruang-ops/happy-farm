@@ -1,5 +1,17 @@
-.godot/
-build/
-tools/raw/
+.import/
+.import/
+.export/
+.export_presets.cfg
 *.import
-.DS_Store
+.godot/
+.cache/
+__pycache__/
+venv/
+.env
+build/
+*.zip
+*.apk
+*.aab
+# Generated assets
+art/
+audio/voice/

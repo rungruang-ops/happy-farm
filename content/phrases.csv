@@ -1,12 +1,3 @@
-id,cat,text_th,text_en
-hello_1,hello,สวัสดีจ้า มาเล่นกับไบรอันกันเถอะ!,Hi! Let's play with Bryan!
-ok_1,correct,เก่งมาก!,Great job!
-ok_2,correct,ถูกต้อง!,Correct!
-ok_3,correct,เยี่ยมไปเลย!,Awesome!
-ok_4,correct,สุดยอด!,Well done!
-no_1,wrong,ลองอีกทีนะ,Try again!
-no_2,wrong,เกือบแล้ว สู้ๆ,Almost! You can do it!
-round_1,round,ทำได้ดีมาก ไปต่อกันเลย!,Keep going!
-round_2,round,ครบแล้ว เก่งจัง!,All done! So smart!
-hint_1,hint,ลองลากไปตรงนี้ดูสิ,Try dragging it here!
-done_1,complete,ผ่านด่านแล้ว เย้!,Level complete! Yay!
+phrase_id,text,voice_key
+p_welcome,Welcome to Happy Farm!,narrator
+p_level_complete,Great job! You finished the level.,narrator

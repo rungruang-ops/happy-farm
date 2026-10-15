@@ -1,5 +1,7 @@
+# screens/game_screen.gd
 extends Control
+class_name GameScreen
 
-# Game screen placeholder
-func _ready():
+func start_level(level_id: String) -> void:
+	# setup level
 	pass

@@ -1,8 +1,10 @@
+# Autoload: game_state.gd
 extends Node
+class_name GameState
 
-var score : int = 0
-var stars : int = 0
+var current_level_id: String = ""
+var score: int = 0
 
 func reset():
+	current_level_id = ""
 	score = 0
-	stars = 0

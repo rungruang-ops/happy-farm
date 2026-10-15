@@ -1,31 +1,41 @@
-import asyncio, csv, pathlib
-import edge_tts
+"""
+tools/make_voice.py
+Generate voice lines for phrases.csv using edge-tts.
+See .env.example for configuration.
+"""
+import os
+import csv
+import asyncio
+from dotenv import load_dotenv
 
-ROOT = pathlib.Path(__file__).resolve().parent.parent
-CONTENT, OUT = ROOT / "game/content", ROOT / "game/audio/voice"
-VOICES = {"th": "th-TH-PremwadeeNeural", "en": "en-US-AnaNeural"}
-PITCH = "+15Hz"
+load_dotenv()
+VOICE = os.getenv('EDGE_TTS_VOICE', 'en-US-AriaNeural')
+OUTPUT_DIR = os.getenv('VOICE_OUTPUT_DIR', 'audio/voice')
 
-def rows(name):
-    with open(CONTENT / name, encoding="utf-8-sig") as f:
-        return list(csv.DictReader(f))
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-def lines():
-    for lang in VOICES:
-        for r in rows("phrases.csv"):
-            yield f"{r['id']}_{lang}", lang, r[f"text_{lang}"]
-        for r in rows("levels.csv"):
-            yield f"lvl_{r['id']}_{lang}", lang, r[f"title_{lang}"]
-        for r in rows("items.csv"):
-            yield f"item_{r['id']}_{lang}", lang, r[f"name_{lang}"]
+async def synthesize(text, out_path):
+    try:
+        import edge_tts
+    except Exception:
+        print('edge-tts not installed; run pip install -r requirements.txt')
+        return
+    communicate = edge_tts.Communicate(text, VOICE)
+    await communicate.save(out_path)
 
 async def main():
-    OUT.mkdir(parents=True, exist_ok=True)
-    for name, lang, text in lines():
-        out = OUT / f"{name}.mp3"
-        if out.exists() or not text.strip():
-            continue
-        await edge_tts.Communicate(text, VOICES[lang], pitch=PITCH).save(str(out))
-        print("✓", name)
+    csv_path = os.path.join('content','phrases.csv')
+    if not os.path.exists(csv_path):
+        print('content/phrases.csv missing')
+        return
+    with open(csv_path, newline='', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            pid = row.get('phrase_id')
+            text = row.get('text')
+            out = os.path.join(OUTPUT_DIR, f"{pid}.mp3")
+            print(f"Generating voice for {pid} -> {out}")
+            await synthesize(text, out)
 
-asyncio.run(main())
+if __name__ == '__main__':
+    asyncio.run(main())

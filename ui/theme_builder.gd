@@ -1,5 +1,7 @@
+# ui/theme_builder.gd
 extends Node
+class_name ThemeBuilder
 
-# UI theme builder placeholder
 func build_theme():
+	# Create Theme resource programmatically if needed
 	pass

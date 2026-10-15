@@ -1,6 +1,7 @@
+# Autoload: sfx.gd
 extends Node
+class_name SFX
 
-# Simple SFX stub for autoload
-func play(name: String) -> void:
-	# Implement audio playback integration
+func play_sound(name: String) -> void:
+	# placeholder: play sound by name
 	pass

@@ -1,5 +1,7 @@
-extends Control
+# ui/mascot.gd
+extends Node2D
+class_name Mascot
 
-# Mascot component
-func _ready():
+func wave():
+	# mascot animation placeholder
 	pass

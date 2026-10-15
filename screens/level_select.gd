@@ -1,5 +1,7 @@
+# screens/level_select.gd
 extends Control
+class_name LevelSelect
 
-# Level select placeholder
 func _ready():
+	# populate level buttons
 	pass

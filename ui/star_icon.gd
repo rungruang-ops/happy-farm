@@ -1,5 +1,7 @@
-extends Control
+# ui/star_icon.gd
+extends TextureRect
+class_name StarIcon
 
-# Star icon component
-func _ready():
+func set_filled(filled: bool) -> void:
+	# update icon state
 	pass
