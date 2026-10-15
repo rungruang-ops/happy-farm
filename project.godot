@@ -5,5 +5,12 @@ config/name="Happy Farm"
 config/description="Educational game for young children"
 config/author="rungruang-ops"
 
+[input]
+
+[autoload]
+Catalog="res://autoload/catalog.gd"
+GameState="res://autoload/game_state.gd"
+LevelFactory="res://core/level_factory.gd"
+
 [rendering]
 quality/driver/driver_name="GLES3"
