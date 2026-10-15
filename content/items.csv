@@ -1,0 +1,21 @@
+id,name_th,name_en,prompt,tags,sound
+apple,แอปเปิ้ล,apple,shiny red apple with a small green leaf,"fruit,food,color:red",
+banana,กล้วย,banana,ripe yellow banana,"fruit,food,color:yellow",
+pear,ลูกแพร์,pear,green pear with a leaf,"fruit,food,color:green",
+strawberry,สตรอว์เบอร์รี,strawberry,red strawberry with a green top,"fruit,food,color:red",
+watermelon,แตงโม,watermelon,whole round striped green watermelon,"fruit,food,color:green",
+orange,ส้ม,orange,round orange citrus fruit with a small leaf,"fruit,food,color:orange",
+grapes,องุ่น,grapes,bunch of purple grapes,"fruit,food,color:purple",
+lemon,เลมอน,lemon,bright yellow lemon,"fruit,food,color:yellow",
+carrot,แครอท,carrot,orange carrot with green leaves,"veg,food,color:orange",
+eggplant,มะเขือม่วง,eggplant,glossy purple eggplant,"veg,food,color:purple",
+haybale,ฟางก้อน,hay bale,square golden hay bale tied with twine,"shape,shape:square",
+tent,เต็นท์,tent,red triangular toy tent,"shape,shape:triangle",
+star,ดาว,star,golden puffy star,"shape,shape:star",
+wheel,ล้อเกวียน,wheel,round wooden cart wheel,"shape,shape:circle",
+cow,วัว,cow,cute baby cow head and upper body portrait,animal,cow.ogg
+pig,หมู,pig,cute pink baby pig head and upper body portrait,animal,pig.ogg
+duck,เป็ด,duck,cute yellow baby duck head and upper body portrait,animal,duck.ogg
+sheep,แกะ,sheep,cute fluffy baby sheep head and upper body portrait,animal,sheep.ogg
+chicken,ไก่,chicken,cute baby chicken head and upper body portrait,animal,chicken.ogg
+horse,ม้า,horse,cute baby horse head and upper body portrait,animal,horse.ogg

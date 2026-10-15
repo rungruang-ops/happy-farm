@@ -1,0 +1,8 @@
+id,title_th,title_en,template,pool,group,choices,rounds,time,bg
+fruit_color,แยกสีผลไม้,Fruit Color Sorting,sort,fruit,color,3,3,0,
+shape_match,จับคู่รูปทรง,Shape Matching,shadow,shape,,4,2,0,
+animal_sound,ทายเสียงสัตว์,Animal Sound Guessing,sound,animal,,3,5,0,
+size_compare,ใหญ่หรือเล็ก,Size Comparison,size,fruit,,4,3,0,
+tractor_seq,เรียงตามลำดับ,Tractor Feeding Sequence,sequence,fruit,,3,3,40,
+fruit_shadow,เงาผลไม้,Fruit Shadows,shadow,fruit,,3,3,0,
+food_color,แยกสีผักผลไม้,Color Sorting 2,sort,food,color,4,3,0,
