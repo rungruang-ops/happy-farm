@@ -1,0 +1,11 @@
+[application]
+config/name="Happy Farm"
+run/main_scene="res://screens/title_screen.tscn"
+config/features=PackedStringArray("4.3", "Forward Plus")
+
+[autoload]
+Catalog="res://autoload/catalog.gd"
+GameState="res://autoload/game_state.gd"
+Sfx="res://autoload/sfx.gd"
+Juice="res://autoload/juice.gd"
+Router="res://autoload/router.gd"

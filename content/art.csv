@@ -12,5 +12,5 @@ sign_wood,ui,"horizontal wooden plank sign with rounded corners and a darker woo
 star,ui,"single glossy golden star with soft rounded points"
 hand,ui,"cartoon white glove hand pointing with the index finger"
 bg_title,bg,"sunny farm with a red barn and silo on the left, wooden fence, green rolling hills, fluffy clouds, flowers in the foreground; keep the center and right side open"
-bg_map,bg,"three-quarter top-down view of a farm valley, a winding dirt path from left to right with small empty roundings, a small river, a windmill, a little farmhouse"
+bg_map,bg,"three-quarter top-down view of a farm valley, a winding dirt path from left to right with small empty round clearings, a small river, a windmill, a little farmhouse"
 bg_play,bg,"farmyard with a distant red barn, wooden fence, grass ground; keep the lower two-thirds open and uncluttered"
